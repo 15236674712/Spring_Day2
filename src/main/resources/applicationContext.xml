@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--配置原始类的相关信息-->
+    <bean id="userService" class="com.baizhi.dynamicporxy.UserServiceImpl"></bean>
+
+    <bean id="accountService" class="com.baizhi.dynamicporxy.AccountServiceImpl"></bean>
+
+    <bean id="userService2" class="com.baizhi.test.UserServiceImpl"></bean>
+
+    <!--配置额外功能类的相关信息-->
+    <bean id="before" class="com.baizhi.dynamicporxy.Before"></bean>
+    <bean id="after" class="com.baizhi.dynamicporxy.After"></bean>
+    <bean id="around" class="com.baizhi.dynamicporxy.Around"></bean>
+    <bean id="throws" class="com.baizhi.dynamicporxy.MyThrows"></bean>
+
+    <aop:config>
+        <!--定义切入点-->                   <!--给所有的方法都添加额外功能-->
+        <aop:pointcut id="pc" expression="execution(*  com.baizhi.test..UserServiceImpl.register(String))"></aop:pointcut>
+        <!--  <aop:pointcut id="pc" expression="args(String,..)"></aop:pointcut>-->
+        <!--  <aop:pointcut id="pc" expression="within(com.baizhi.test..*)"></aop:pointcut>-->
+        <!--  <aop:pointcut id="pc" expression="@annotation(com.baizhi.anotation.KG)"></aop:pointcut>-->
+        <!--组装切面-->  <!--组装切面  说明把before额外功能添加给对应的切入点-->
+        <aop:advisor advice-ref="throws" pointcut-ref="pc"></aop:advisor>
+    </aop:config>
+
+</beans>
