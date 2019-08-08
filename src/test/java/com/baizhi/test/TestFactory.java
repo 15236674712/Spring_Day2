@@ -14,7 +14,8 @@ public class TestFactory {
         
         
          System.out.println("=======");
-        
+         System.out.println("===1====");
+
         //创建工厂
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
         // User user=(User) ac.getBean("user");
