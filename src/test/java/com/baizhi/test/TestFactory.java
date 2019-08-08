@@ -11,6 +11,10 @@ public class TestFactory {
 
     @Test
     public   void   TestSpring(){
+        
+        
+         System.out.println("=======");
+        
         //创建工厂
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
         // User user=(User) ac.getBean("user");
